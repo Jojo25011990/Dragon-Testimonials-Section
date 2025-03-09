@@ -1,0 +1,17 @@
+// *** Section 01 - Heading ***
+@keyframes animBorderBottom {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+// *** Section 02 - Dragon ***
+@keyframes dragon-flight {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(-240%);
+  }
+}

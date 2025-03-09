@@ -1,0 +1,237 @@
+@forward './reset';
+@use './abstract' as *;
+
+html,
+body {
+  height: 100%;
+  font-family: $base-family;
+}
+
+.section {
+  @include dimension-settings(100%, null, 100vh);
+
+  background-color: $color-dark;
+  color: $color-white-light;
+}
+
+.section1 {
+  @include flex-center;
+
+  .heading__primary {
+    position: relative;
+
+    font-size: clamp(2.3rem, 4.5cqi, 5rem);
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -0.7rem;
+      left: 0;
+      transform-origin: left;
+      transform: scaleX(0);
+
+      @include dimension-settings(100%, null, 0.2rem);
+
+      background-color: $color-white-light;
+
+      transition: all 1s;
+
+      animation: animBorderBottom 1s linear 3s forwards;
+    }
+  }
+
+  .span {
+    display: inline-block;
+  }
+}
+
+.section2 {
+  @include flex-center;
+
+  position: relative;
+
+  overflow-x: hidden;
+
+  //   @media (max-width: 500px) {
+  //     min-height: 100vh;
+  //   }
+
+  background: {
+    image: linear-gradient($color-linear-gradient, $color-linear-gradient),
+      url('../img/cover-5.jpg');
+    repeat: no-repeat;
+    size: cover;
+  }
+
+  &__dragon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    transform: translateX(100%);
+
+    @include dimension-settings(80rem, null, 75rem);
+
+    background: {
+      image: url('../img/red-dragon.png');
+      size: cover;
+      repeat: no-repeat;
+    }
+
+    &.active {
+      animation: dragon-flight 9s ease-in forwards;
+    }
+
+    @media (max-width: 1000px) {
+      @include dimension-settings(66rem, null, 55rem);
+    }
+
+    @media (max-width: 700px) {
+      @include dimension-settings(50rem, null, 45rem);
+
+      top: 20%;
+    }
+
+    @media (max-width: 510px) {
+      @include dimension-settings(45rem, null, 35rem);
+    }
+  }
+
+  &__bubble {
+    @include dimension-settings(clamp(5rem, 30%, 20rem), null, 5rem);
+
+    border-radius: 1rem;
+    background-color: $color-white;
+    box-shadow: 0 0 0 0.2rem $color-grey;
+
+    @include flex-center;
+
+    pointer-events: none;
+    transition: opacity 0.325s ease-in;
+
+    position: absolute;
+    z-index: 999;
+
+    @media (max-width: 1280px) {
+      scale: clamp(0.4, 0.85, 1);
+    }
+
+    &--woman,
+    &--man {
+      top: 50%;
+      left: -14%;
+
+      opacity: 0;
+
+      @media (max-width: 510px) {
+        top: 47%;
+        left: -12.5%;
+      }
+    }
+
+    &--man {
+      &.active {
+        opacity: 1;
+      }
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 3rem;
+      right: 0.6rem;
+      border-bottom: 2rem solid transparent;
+      border-top: 2rem solid transparent;
+      border-left: 4rem solid $color-white;
+      transform: rotate(65deg);
+    }
+
+    &-text {
+      font-size: clamp(1.1rem, 1.8cqi, 1.6rem);
+      color: $color-grey;
+
+      position: relative;
+      z-index: 20;
+    }
+  }
+
+  &__clients {
+    @include dimension-settings(80vw, null, 80vh);
+    @include flex-center;
+    flex-direction: column;
+
+    position: relative;
+    z-index: 5;
+
+    @media (max-width: 1300px) {
+      left: 2rem;
+    }
+
+    @media (max-width: 510px) {
+      left: 3rem;
+    }
+  }
+
+  &__client {
+    @include flex-center;
+
+    position: relative;
+
+    &-box {
+      position: relative;
+      @include dimension-settings(30rem);
+    }
+
+    &-img {
+      @include dimension-settings(100%, null, 100%);
+
+      position: relative;
+
+      object-fit: cover;
+
+      transition: all 0.3s ease;
+
+      &:hover {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+
+    &-img--woman,
+    &-img--man {
+      opacity: 0.75;
+      transition: all 0.3s ease;
+
+      &.active {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+
+    &-title {
+      position: absolute;
+      bottom: 4.4%;
+      left: 40%;
+      transform: translate(-40%, -3.5%);
+
+      text-transform: uppercase;
+
+      font: {
+        size: clamp(1.2rem, 1.5cqi, 1.7rem);
+      }
+    }
+
+    &-quote {
+      font-size: clamp(1.2rem, 2cqi, 2.5rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-top: 4rem;
+      margin-left: -4rem;
+
+      @media (max-width: 500px) {
+        margin-left: -2rem;
+      }
+    }
+  }
+}
